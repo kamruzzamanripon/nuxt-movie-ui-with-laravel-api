@@ -13,6 +13,10 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
+    
+    
+    
+   
   ],
   colorMode: {
     classSuffix: ''
@@ -20,11 +24,16 @@ export default defineNuxtConfig({
    // The private keys which are only available within server-side
   runtimeConfig: {
     OPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
+    API_BASE_URL: process.env.API_BASE_URL,
     // Keys within public, will be also exposed to the client-side
     public: {
       OPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
+      API_BASE_URL: process.env.API_BASE_URL,
     },
   }, 
+  plugins: [
+    // '~/plugins/axios.js',
+  ],
   
   
   

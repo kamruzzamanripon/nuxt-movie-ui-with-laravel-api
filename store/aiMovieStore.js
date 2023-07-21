@@ -1,5 +1,6 @@
-import { defineStore } from 'pinia';
+import axios from '../helpers/axios.js';
 
+import { defineStore } from 'pinia';
 export const aiMovieStore = defineStore('aiMovieStore',{
     state: ()=>({
       aiMovieData:{},
@@ -13,6 +14,16 @@ export const aiMovieStore = defineStore('aiMovieStore',{
         async actionAiMovieData(payload){
           this.aiMovieData = payload;
           this.loading = false;
+        },
+        async actionAllCategoryApi(){
+          alert('ok')
+
+          
+          const config = useRuntimeConfig(); 
+          const data =  await axios.get('/all-category');
+          console.log('axios data', data)
+      
+         
         }
     }
   })

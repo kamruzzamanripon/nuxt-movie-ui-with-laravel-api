@@ -44,12 +44,18 @@
 </template>
 
 <script setup>
+import { ref, watchEffect } from 'vue';
 import { aiMovieStore } from '../../store/aiMovieStore.js';
-import { ref } from 'vue';
 
 const aiMovieStoreInfo = aiMovieStore()
 const movieData = ref({
-    
-    description:""
+    title:"",
+    description:"", 
+    image:"", 
+    category_id:"", 
 })
+
+watchEffect(()=>{
+    aiMovieStoreInfo.actionAllCategoryApi()
+},[])
 </script>
