@@ -31,7 +31,7 @@
 import { Configuration, OpenAIApi } from 'openai';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import dataStoreJson from '../../data.json';
+//import dataStoreJson from '../../data.json';
 import { aiMovieStore } from '../../store/aiMovieStore.js';
 
 const isSubmitted = ref(false);
@@ -60,9 +60,9 @@ const submitForm = async() => {
     isSubmitted.value = true;
     if (validateInputs()) {
         aiMovieStoreInfo.loading = true;
-        //const aiMovieData = await fetchSynopsis(movieData.value.description)
-        //aiMovieStoreInfo.actionAiMovieData(aiMovieData);
-        aiMovieStoreInfo.actionAiMovieData(dataStoreJson);
+        const aiMovieData = await fetchSynopsis(movieData.value.description)
+        await aiMovieStoreInfo.actionAiMovieData(aiMovieData);
+        //await aiMovieStoreInfo.actionAiMovieData(dataStoreJson);
         router.push('/movie-made');
         aiMovieStoreInfo.loading = false;
     }

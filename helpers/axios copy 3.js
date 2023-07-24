@@ -9,13 +9,13 @@ const axiosInstance = axios.create({
     },
   },
 });
-//axiosInstance.defaults.withCredentials = true;
+axiosInstance.defaults.withCredentials = true;
 // Interceptor for APIs that require JWT token
 axiosInstance.interceptors.request.use((config) => {
   // Check if the API requires JWT token
   if (config.authRequired) {
     // Replace 'your-jwt-token' with the actual JWT token from your authentication mechanism
-    const jwtToken = '9|BDlMB5bPtZGdS7HAdUA3WkQiXaoy6zDjhTntxfcL';
+    const jwtToken = '10|fUb12RptuFIAFyytxtTMSAOx8jyUlr0MoUtbwHhs';
     config.headers.Authorization = `Bearer ${jwtToken}`;
   }
   return config;
