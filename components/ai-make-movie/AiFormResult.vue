@@ -82,6 +82,10 @@ const getImageSource = computed(() => {
 });
 
 const submitForm = async() => {
+    if(!movieData.value.category_id){
+        alert("Select Category")
+        return;
+    }
     movieData.value.base64Data = getImageSource;
     await aiMovieStoreInfo.actionAiMovieDataSendServer(movieData.value);
     aiMovieStoreInfo.loading = false;

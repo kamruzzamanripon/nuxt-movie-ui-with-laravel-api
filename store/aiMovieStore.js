@@ -13,7 +13,7 @@ export const aiMovieStore = defineStore('aiMovieStore',{
     },
     actions:{
         async getToken (){
-          return await axios.get("/csrf-token")
+          return await axios.get("/sanctum/csrf-cookie")
         },
         async actionAiMovieData(payload){
           this.aiMovieData = payload;
@@ -31,7 +31,6 @@ export const aiMovieStore = defineStore('aiMovieStore',{
 
 
         async actionAiMovieDataSendServer(payload){
-          //console.log('actionAiMovieDataSendServer-2', csrfToken)
           console.log('actionAiMovieDataSendServer', payload)
           const response = await axios.post('/ai-movie-store', payload);
         }

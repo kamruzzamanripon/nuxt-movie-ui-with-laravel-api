@@ -1,0 +1,52 @@
+<template>
+    <div class="flex h-screen items-center justify-center bg-gray-100">
+      <div class="bg-white p-8 shadow-md rounded-lg w-80">
+        <h1 class="text-2xl font-semibold mb-4">Register</h1>
+        <form @submit.prevent="register">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Name</label>
+            <input v-model="name" type="text" class="mt-1 block w-full border rounded-md px-3 py-2" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <input v-model="email" type="email" class="mt-1 block w-full border rounded-md px-3 py-2" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Password</label>
+            <input v-model="password" type="password" class="mt-1 block w-full border rounded-md px-3 py-2" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
+            <input v-model="passwordConfirmation" type="password" class="mt-1 block w-full border rounded-md px-3 py-2" required />
+          </div>
+          <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Register</button>
+        </form>
+      </div>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        name: "",
+        email: "",
+        password: "",
+        passwordConfirmation: "",
+      };
+    },
+    methods: {
+      register() {
+        // You can implement your registration logic here.
+        // For demonstration purposes, we'll just display the registration details in the console.
+        console.log("Name:", this.name);
+        console.log("Email:", this.email);
+        console.log("Password:", this.password);
+        console.log("Password Confirmation:", this.passwordConfirmation);
+        // After successful registration, you can redirect the user to the desired page.
+        // For example: this.$router.push('/dashboard');
+      },
+    },
+  };
+  </script>
+  
