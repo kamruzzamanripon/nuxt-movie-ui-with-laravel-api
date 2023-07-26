@@ -18,5 +18,9 @@
 import FormInput from '@/components/make-category/FormInput.vue';
 import LeftSideBar from '@/layouts/LefeSideBar.vue';
 import RightSideBar from '@/layouts/RightSideBar.vue';
+
+definePageMeta({
+    middleware:['auth']
+})
 </script>
     

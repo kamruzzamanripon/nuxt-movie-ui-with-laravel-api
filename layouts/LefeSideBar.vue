@@ -2,37 +2,37 @@
     <!-- Left Sidebar -->
     <aside class=" w-1/6 py-10 pl-10  min-w-min  border-r border-gray-300 dark:border-zinc-700  hidden md:block ">
 
-        <nuxt-link to="/">
+        <NuxtLink to="/">
             <div class=" font-bold text-lg flex items-center gap-x-3">
                 <RMovieLogo />
                 <div class="tracking-wide dark:text-white">RMovie<span class="text-red-600">.</span></div>
             </div>
-        </nuxt-link>
+        </NuxtLink>
 
         <!-- Menu -->
         <div class="mt-12 flex flex-col gap-y-4 text-gray-500 fill-gray-500 text-sm">
             <div class="text-gray-400/70  font-medium uppercase">Menu</div>
-            <RouterLink to="/" class="flex items-center space-x-2 py-1   font-semibold  border-r-4 border-r-red-600 pr-20 "
+            <NuxtLink to="/" class="flex items-center space-x-2 py-1   font-semibold  border-r-4 border-r-red-600 pr-20 "
                 :class="{ 'text-green-700 dark:text-yellow-200': isActive('/') }" @click="setActiveMenuItem('/')">
                 <home />
                 <span>Home</span>
-            </RouterLink>
+            </NuxtLink>
 
-            <RouterLink to="/ai-make-movie"
+            <NuxtLink to="/ai-make-movie"
                 class="flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white"
                 :class="{ 'text-green-700 dark:text-yellow-200': isActive('/ai-make-movie') }"
                 @click="setActiveMenuItem('/ai-make-movie')">
                 <MovieMaker />
                 <span>Ai Make Movie</span>
-            </RouterLink>
+            </NuxtLink>
 
-            <RouterLink to="/manual-make-movie"
+            <NuxtLink to="/manual-make-movie"
                 class="flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white"
                 :class="{ 'text-green-700 dark:text-yellow-200': isActive('/manual-make-movie') }"
                 @click="setActiveMenuItem('/manual-make-movie')">
                 <MovieMaker />
                 <span>Manual Make Movie</span>
-            </RouterLink>
+            </NuxtLink>
 
             <a class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white "
                 href="#">
@@ -57,13 +57,13 @@
                 <span>Friends</span>
             </a>
 
-            <RouterLink to="/make-category"
+            <NuxtLink to="/make-category"
                 class="flex items-center space-x-1 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white"
                 :class="{ 'text-green-700 dark:text-yellow-200': isActive('/make-category') }"
                 @click="setActiveMenuItem('/make-category')">
                 <MakeCategory />
                 <span>Make Category</span>
-            </RouterLink>
+            </NuxtLink>
 
 
             <div class="mt-8 text-gray-400/70  font-medium uppercase">General</div>
@@ -72,16 +72,16 @@
                 <Settings />
                 <span>Settings</span>
             </a>
-            <a class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white"
+            <NuxtLink to="/logout" class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white"
                 href="#">
                 <Logout />
                 <span>Logout</span>
-            </a>
-            <a class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white"
+            </NuxtLink>
+            <NuxtLink to="/login" class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white"
                 href="#">
                 <Logout />
                 <span>LogIn</span>
-            </a>
+            </NuxtLink>
 
         </div><!-- /Menu -->
 
