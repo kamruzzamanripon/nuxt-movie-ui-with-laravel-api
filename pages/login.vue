@@ -33,7 +33,7 @@ import { userStore } from '../store/userStore.js';
         alert('Please Type input field')
     }
     
-    await userStoreInfo.actionUserLogin(loginInfo.value,)
+    await userStoreInfo.actionLogin(loginInfo.value,)
 
  }
   </script>

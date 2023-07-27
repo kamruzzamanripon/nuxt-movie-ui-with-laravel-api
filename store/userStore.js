@@ -1,24 +1,44 @@
 import { defineStore } from 'pinia';
 import axios from '../helpers/axios.js';
 
+
 export const userStore = defineStore('userStore', {
   state: () => ({
     loading: false,
     logInUserInfo: {},
     categories: [],
-    isLogIn:false
+    isLogIn:false,
   }),
 
-  getters: {},
+  getters: {
+    authCheck() {
+      if (process.client) {
+        if (this.isLogIn == true) {
+           return true;
+        }
+        if(this.isLogIn == false){
+          const token = localStorage.getItem('token');
+          return !!token;
+        }
+         
+        return false;
+      }
+    },
+    token (){
+      if (typeof window == undefined) {
+        return false;
+      }
+      const token = localStorage.getItem("token") ?? this.logInUserInfo.data.token
+      if(token){
+        return token;
+      }
+
+      return null;
+    }
+  },
 
   actions: {
-    // async csrfCookie() {
-    //   await useFetch("http://127.0.0.1:8000/sanctum/csrf-cookie", {
-    //     credentials: "include"
-    //   });
-    // }, 
-
-    async actionUserLogin(payload, token) {
+     async actionLogin(payload, token) {
       try {
         const response = await axios.post('/login', payload);
         this.logInUserInfo = response.data;
@@ -28,30 +48,29 @@ export const userStore = defineStore('userStore', {
         localStorage.setItem('token', response.data.data.token);
         navigateTo("/");
       } catch (error) {
-        throw new Error('Login failed.');
+        throw new Error('Login failed.', error);
       }
     },
 
-    logout() {
-      // Clear the user data and token from local storage
+    async actionLogout(payload) {
+      const response = await axios.post('/logout');
       localStorage.removeItem('user');
       localStorage.removeItem('token');
       this.logInUserInfo = null;
       this.isLogIn = false;
     },
 
-    beforeCreate() {
-      // Check if the user data and token exist in local storage
-      const userData = localStorage.getItem('user');
-      const token = localStorage.getItem('token');
-  
-      if (userData && token) {
-        // Parse the user data and set it in the store
-        const parsedUserData = JSON.parse(userData);
-        this.logInUserInfo = parsedUserData;
-        this.isLogIn = true;
+    async actionRegister(payload){
+      console.log('registation', payload)
+      try {
+        const response = await axios.post('/register', payload);
+        navigateTo("/login");
+      } catch (error) {
+        throw new Error('Registration failed.', error);
       }
-    },
+    }
+
+   
 
 
 

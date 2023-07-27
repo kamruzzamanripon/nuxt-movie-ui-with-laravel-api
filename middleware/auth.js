@@ -5,7 +5,8 @@ export default defineNuxtRouteMiddleware(({ redirect }) => {
       // This code will only run on the client-side
   
      const userStoreInfo = userStore();
-     if ( !localStorage.getItem('token')) {
+   
+      if (!userStoreInfo.authCheck) {
          return navigateTo("/login")
       }
     }

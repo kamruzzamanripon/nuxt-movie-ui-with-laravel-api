@@ -72,15 +72,17 @@
                 <Settings />
                 <span>Settings</span>
             </a>
-            <NuxtLink to="/logout" class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white"
-                href="#">
+            <NuxtLink class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white"  v-if="userStoreInfo.authCheck" @click="logOutHandle">
                 <Logout />
                 <span>Logout</span>
             </NuxtLink>
-            <NuxtLink to="/login" class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white"
-                href="#">
+            <NuxtLink to="/login" class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white cursor-pointer"  v-if="!userStoreInfo.authCheck">
                 <Logout />
                 <span>LogIn</span>
+            </NuxtLink>
+            <NuxtLink to="/registration" class=" flex items-center space-x-2 py-1  group hover:border-r-4 hover:border-r-red-600 hover:font-semibold dark:hover:text-white"  v-if="!userStoreInfo.authCheck">
+                <Logout />
+                <span>Registration</span>
             </NuxtLink>
 
         </div><!-- /Menu -->
@@ -90,6 +92,7 @@
 
 
 <script setup>
+import { userStore } from '@/store/userStore.js';
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import ComingSoon from '../components/Icon/ComingSoon.vue';
@@ -105,6 +108,7 @@ import Settings from '../components/Icon/Settings.vue';
 
 const route = useRoute();
 const activeMenuItem = ref(route.path);
+const userStoreInfo = userStore();
 
 const setActiveMenuItem = (path) => {
     activeMenuItem.value = path;
@@ -113,6 +117,10 @@ const setActiveMenuItem = (path) => {
 const isActive = (path) => {
     return activeMenuItem.value === path;
 };
+
+const logOutHandle = async()=>{
+     await userStoreInfo.actionLogout()
+}
 </script>
 
   components: { Home },
