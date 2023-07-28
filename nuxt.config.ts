@@ -25,10 +25,12 @@ export default defineNuxtConfig({
   runtimeConfig: {
     OPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
     API_BASE_URL: process.env.API_BASE_URL,
+    API_ROOT_URL: process.env.API_ROO_URL,
     // Keys within public, will be also exposed to the client-side
     public: {
       OPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
       API_BASE_URL: process.env.API_BASE_URL,
+      API_ROOT_URL: process.env.API_ROOT_URL,
     },
   }, 
   

@@ -5,7 +5,9 @@ export const aiMovieStore = defineStore('aiMovieStore',{
     state: ()=>({
       loading:false,
       aiMovieData:{},
-      categories:[]
+      categories:[],
+      topMovies:[],
+      categoryWiseMovie:[],
     }),
   
     getters:{
@@ -26,13 +28,19 @@ export const aiMovieStore = defineStore('aiMovieStore',{
           this.categories = data.data.data;
           //this.actionAiMovieData = movieData;
         },
-
-
-
-
         async actionAiMovieDataSendServer(payload){
           console.log('actionAiMovieDataSendServer', payload)
           const response = await axios.post('/ai-movie-store', payload);
+        },
+        async actionTopMovie(payload){
+          const data =  await axios.get('/top-movies');
+          this.topMovies = data.data.data.data;
+        },
+        async actionCategoryWiseMovie(){
+          const data =  await axios.get('/category-wise-movies');
+          console.log('actionCategoryWiseMovie', data);
+          this.categoryWiseMovie = data.data.data.data
         }
+
     }
   })
