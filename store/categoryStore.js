@@ -1,13 +1,31 @@
-import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { defineStore } from 'pinia';
+import { ref } from 'vue';
+import axios from "../helpers/axios.js";
 
 export const categoryStore = defineStore('categoryStore', () => {
-    const count = ref(0)
-    const name = ref('Syed kamruzzaman')
-    const doubleCount = computed(() => count.value * 2)
-    function increment() {
-      count.value++
-    }
+  const categories = ref([])
+    
+  const actionStoreCategory = async(payload)=>{
+    console.log('actionStoreCategory', payload)
+    const formData = new FormData();
+    formData.append("name", payload.name);
+    formData.append("image", payload.file);
+    //console.log("actionManualMovieDataSendToServer", [...formData]);
+    const response = await axios.post("/category-store", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    navigateTo("/");
+  }
+
+  const actionAllCategoryApi = async()=> {
+    const config = useRuntimeConfig();
+    const data = await axios.get("/all-category");
+    console.log("axios data", data);
+    categories.value = data.data.data;
+    //this.actionAiMovieData = movieData;
+  }
   
-    return { count, name, doubleCount, increment }
+    return { actionStoreCategory, actionAllCategoryApi, categories }
   })

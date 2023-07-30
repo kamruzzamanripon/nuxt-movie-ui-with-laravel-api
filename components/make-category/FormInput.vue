@@ -13,8 +13,10 @@
                 </label>
                 <input type="text" id="large-input"
                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Type your Movie Title..." v-model="movieData.title">
-                <p v-if="!movieData.title && isSubmitted" class="text-red-500 mt-2">Movie Title is required.</p>
+                    placeholder="Type your Movie name..." 
+                    v-model="categoryData.name"
+                >
+                <p v-if="!categoryData.name && isSubmitted" class="text-red-500 mt-2">Category Name is required.</p>
             </div>
             <div class="mb-6">
                 <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -22,8 +24,10 @@
                 </label>
                 <input type="file" id="large-input"
                     class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Type your Movie Title...">
-                <p v-if="!movieData.title && isSubmitted" class="text-red-500 mt-2">Movie Title is required.</p>
+                    placeholder="Type your Movie name..."
+                    @change="handleFileChange"
+                >
+                <p v-if="!categoryData.name && isSubmitted" class="text-red-500 mt-2">Image is required.</p>
             </div>
             <div class="text-right">
                 <button type="submit" class="bg-black text-white p-3 rounded-md dark:border" @click="submitForm">
@@ -36,36 +40,38 @@
 </template>
 
 <script setup>
-import { Configuration, OpenAIApi } from 'openai';
+import { categoryStore } from '@/store/categoryStore.js';
 import { ref } from 'vue';
 
-const movieData = ref({
-    title: "",
-    category: "",
-    description: "",
-    file:""
+const categoryData = ref({
+    name: "",
+    file :""
 })
 
-const config = useRuntimeConfig();
-const openAiApiKey = config.public.OPEN_AI_API_KEY
-const configuration = new Configuration({
-    apiKey: openAiApiKey
-})
-const openAi = new OpenAIApi(configuration);
 const isSubmitted = ref(false);
+const categoryStoreInfo = categoryStore()
 
+//input file handler
+function handleFileChange(event) {
+  const file = event.target.files[0];
+  categoryData.value.file = file;
+}
+//form validation
 function validateInputs() {
-    const { title, category, description } = movieData.value;
-    if (!title || !category || !description) {
+    const { name, file } = categoryData.value;
+    if (!name || !file ) {
         return false;
     }
     return true;
 }
 
+onMounted( async()=>{
+    await categoryStoreInfo.actionAllCategoryApi();
+})
 const submitForm = () => {
     isSubmitted.value = true;
     if (validateInputs()) {
-        const userInput = 'text-area text as like input';
+        categoryStoreInfo.actionStoreCategory(categoryData.value);
 
     }
 };
