@@ -34,15 +34,10 @@ export default defineNuxtConfig({
     },
   }, 
   
+  
   plugins: [
     // '~/plugins/axios.js',
   ],
 
-  
-
-  
-  
-  
-  
  
 })
