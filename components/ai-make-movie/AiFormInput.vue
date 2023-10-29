@@ -13,7 +13,7 @@
                     Type Your Movie Idea
                 </label>
                 <textarea id="message" rows="4"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-[60vh]"
                     placeholder="Type Movie short description..." v-model="movieData.description"></textarea>
                 <p v-if="!movieData.description && isSubmitted" class="text-red-500 mt-2">Movie Description is required.</p>
             </div>
@@ -34,20 +34,27 @@ import { useRouter } from 'vue-router';
 //import dataStoreJson from '../../data.json';
 import { aiMovieStore } from '../../store/aiMovieStore.js';
 
+//difine store
 const isSubmitted = ref(false);
 const router = useRouter();
 const movieData = ref({
     description:""
 })
+
+//pinia store call
 const aiMovieStoreInfo = aiMovieStore()
-const config = useRuntimeConfig(); //for read env file
+
+//env file connect
+const config = useRuntimeConfig(); 
+//AI api Key call
 const openAiApiKey = config.public.OPEN_AI_API_KEY
 const configuration = new Configuration({
     apiKey: openAiApiKey
 })
+//Configure AI
 const openAi = new OpenAIApi(configuration);
 
-
+//Form validation custom
 function validateInputs() {
     const { description } = movieData.value;
     if (!description) {
@@ -56,6 +63,7 @@ function validateInputs() {
     return true;
 }
 
+//form submit handler
 const submitForm = async() => {
     isSubmitted.value = true;
     if (validateInputs()) {

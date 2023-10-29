@@ -2,7 +2,7 @@
      <div class="bg-gray-200 p-5 rounded-md dark:bg-black my-10">
             
             <div class="text-center mb-8">
-                <h1 class="text-2xl font-bold text-gray-700 mb-3 dark:text-white">This is your Search Resultxx</h1>
+                <h1 class="text-2xl font-bold text-gray-700 mb-3 dark:text-white">This is your Search Result</h1>
             </div>
 
             <div class="mx-10 px-10 py-16 bg-gray-400 dark:bg-black dark:border rounded-md">

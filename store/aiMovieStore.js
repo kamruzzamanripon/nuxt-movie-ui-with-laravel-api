@@ -1,7 +1,11 @@
 import axios from "../helpers/axios.js";
 
 import { defineStore } from "pinia";
+
+//define pinia store
 export const aiMovieStore = defineStore("aiMovieStore", {
+
+  //initial store
   state: () => ({
     loading: false,
     aiMovieData: {},
@@ -11,10 +15,13 @@ export const aiMovieStore = defineStore("aiMovieStore", {
   }),
 
   getters: {},
+
   actions: {
     async getToken() {
       return await axios.get("/sanctum/csrf-cookie");
     },
+
+    //here payload is ai data. this data store in pinia
     async actionAiMovieData(payload) {
       this.aiMovieData = payload;
       this.loading = false;
@@ -26,11 +33,15 @@ export const aiMovieStore = defineStore("aiMovieStore", {
       this.categories = data.data.data;
       //this.actionAiMovieData = movieData;
     },
+
+    //here send ai data to server for save this data in our database
     async actionAiMovieDataSendServer(payload) {
       console.log("actionAiMovieDataSendServer", payload);
       const response = await axios.post("/ai-movie-store", payload);
       navigateTo("/");
     },
+
+    //here menual movie data send to server for save this data in our database
     async actionManualMovieDataSendToServer(payload) {
       console.log("actionManualMovieDataSendToServer", payload);
       const formData = new FormData();
@@ -49,10 +60,14 @@ export const aiMovieStore = defineStore("aiMovieStore", {
       });
       navigateTo("/");
     },
+
+    //fetch top movies from database
     async actionTopMovie(payload) {
       const data = await axios.get("/top-movies");
       this.topMovies = data.data.data.data;
     },
+
+    //fetch category wise movie list from database
     async actionCategoryWiseMovie() {
       const data = await axios.get("/category-wise-movies");
       console.log("actionCategoryWiseMovie", data);
